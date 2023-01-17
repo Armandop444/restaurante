@@ -18,10 +18,10 @@
                         <form id="loginform" action="">
 
                         <div class="input-group flex-nowrap mb-4">
-                            <input type="text" name="nombre" class="form-control" placeholder="Usuario" aria-label="Usuario" aria-describedby="addon-wrapping">
+                            <input type="text" name="user" class="form-control" placeholder="Usuario" aria-label="Usuario" aria-describedby="addon-wrapping">
                         </div>
                         <div class="input-group flex-nowrap mb-4">
-                            <input type="password" name="password" class="form-control" placeholder="Contraseña" aria-label="Password" aria-describedby="addon-wrapping">
+                            <input type="password" name="pass" class="form-control" placeholder="Contraseña" aria-label="Password" aria-describedby="addon-wrapping">
                         </div>
                         <div class="alert alert-danger d-none" role="alert" id="mensaje"> 
                         </div>
@@ -35,4 +35,6 @@
         </div>
     </div>  
 </body>
+<script type="text/javascript" src="<?php echo URL; ?>public_html/js/api.js"></script>
+<script type="text/javascript" src="<?php echo URL; ?>public_html/js/login.js"></script>
 </html>
