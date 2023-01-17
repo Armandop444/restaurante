@@ -7,6 +7,6 @@
     <title>Restaurante</title>
 </head>
 <body>
-    <h1>Bienvenidos al Restaurante</h1>
+    <h1>Dashboard User</h1>
 </body>
 </html>

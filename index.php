@@ -7,8 +7,8 @@ $url = explode("/", $url);
 
 #validar que la url tenga contenido
 if (empty($url[0])){
-    $archivoController = 'app/controllers/main';
-    $url[0]="main";
+    $archivoController = 'app/controllers/dashboarduser';
+    $url[0]="DashboardUser";
 }else{
     $archivoController = "app/controllers/{$url[0]}";
 }
