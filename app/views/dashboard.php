@@ -16,7 +16,7 @@
                     <?php include_once "app/views/components/menu.php" ?>
                 </section>
             </div>
-            <div class="col-10" style="max-height: 780px;overflow-y: scroll;">
+            <div class="col-10 overflow-auto" style="max-height: 780px">
                 <section id="contenido">
                     <div class="row ">
                         <!-- Carousel -->
