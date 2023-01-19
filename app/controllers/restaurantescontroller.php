@@ -54,6 +54,12 @@ class RestaurantesController extends Controller {
         }
         echo json_encode($info);
     }
+
+    public function deleteRestaurante(){
+        $records = $this->restaurante->deleteRestaurante($_GET["id"]);
+        $info = array('success' => true, 'msg' => "Registro eliminado con exito");
+        echo json_encode($info);
+    }
 }
 
 ?>

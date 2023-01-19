@@ -35,5 +35,8 @@ class Restaurantes extends DB{
         return $this->executeQuery("Select * from restaurantes where idrestaurante='$id'");
     }
 
+    public function deleteRestaurante($id){
+        return $this->executeUpdate("delete from restaurantes where idrestaurante='$id'");
+    }
 }
 ?>

@@ -26,10 +26,10 @@ function eventListeners() {
     btnNuevo.addEventListener("click", agregarRestaurante);
     document.addEventListener("DOMContentLoaded", cargarDatos);
     searchText.addEventListener("input", filtro);
-    btnCancelar.addEventListener("click",cancelarRestaurante);
-    divFoto.addEventListener("click",agregarFoto);
-    inputFoto.addEventListener("change",actualizarFoto);
-    form.addEventListener("submit",guardarRestaurante);
+    btnCancelar.addEventListener("click", cancelarRestaurante);
+    divFoto.addEventListener("click", agregarFoto);
+    inputFoto.addEventListener("change", actualizarFoto);
+    form.addEventListener("submit", guardarRestaurante);
 }
 
 function cargarDatos() {
@@ -64,87 +64,108 @@ function cancelarRestaurante() {
 // Guardar Restaurante
 function guardarRestaurante(e) {
     e.preventDefault();
-    const formData= new FormData(form);
-    API.saveRestaurante(formData).then(data=>{
+    const formData = new FormData(form);
+    API.saveRestaurante(formData).then(data => {
         if (data.success) {
             cancelarRestaurante();
             Swal.fire({
                 icon: 'infor',
                 text: data.msg
             });
-        }else{
+        } else {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
                 text: data.msg
             });
         }
-    }).catch(error=>{
-        console.error("Error",error);
+    }).catch(error => {
+        console.error("Error", error);
     });
 }
 function editarRestaurante(id) {
     limpiarForm(1);
     panelDatosRestaurante.classList.add("d-none");
     panelFormularioRestaurante.classList.remove("d-none");
-    API.getOneRestaurante(id).then(data=>{
+    API.getOneRestaurante(id).then(data => {
         if (data.success) {
             mostrarDatosForm(data.records[0]);
-        }else{
+        } else {
             Swal.fire({
-                icon:"error",
+                icon: "error",
                 title: "Error",
                 text: data.msg
             });
         }
-    }).catch(error=>{
-        console.error("Error",error);
+    }).catch(error => {
+        console.error("Error", error);
     });
 }
 
 function eliminarRestaurante(id) {
-    alert(id);
+    Swal.fire({
+        title: "¿Desea eliminar el registro?",
+        showDenyButton: true,
+        confirmButtonText: "Si",
+        denyButtonText: "No"
+    }).then(result => {
+        if (result.isConfirmed) {
+            API.deleteRestaurante(id).then(data => {
+                if (data.success) {
+                    cancelarRestaurante();
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error",
+                        text: data.msg
+                    });
+                }
+            }).catch(error => {
+                console.error("Error", error);
+            });
+        }
+    });
 }
 
 //funcion para añadir una foto con preview
 function agregarFoto() {
-    inputFoto.click();   
+    inputFoto.click();
 }
 
-function mostrarDatosForm(record){
-    const {idrestaurante, nombre_restaurante, direccion, telefono, contacto, fecha_ingreso,foto,latitud,longitud } = record;
-    document.querySelector("#idrestaurante").value=idrestaurante;
-    document.querySelector("#nombre").value=nombre_restaurante;
-    document.querySelector("#direccion").value=direccion;
-    document.querySelector("#telefono").value=telefono;
-    document.querySelector("#contacto").value=contacto;
-    document.querySelector("#fechaI").value=fecha_ingreso;
-    divFoto.innerHTML=`<img src="${foto}" class="h-100 w-100" style="object-fit:contain;">`;
-    document.querySelector("#lat").value=latitud;
-    document.querySelector("#lon").value=longitud;
+function mostrarDatosForm(record) {
+    const { idrestaurante, nombre_restaurante, direccion, telefono, contacto, fecha_ingreso, foto, latitud, longitud } = record;
+    document.querySelector("#idrestaurante").value = idrestaurante;
+    document.querySelector("#nombre").value = nombre_restaurante;
+    document.querySelector("#direccion").value = direccion;
+    document.querySelector("#telefono").value = telefono;
+    document.querySelector("#contacto").value = contacto;
+    document.querySelector("#fechaI").value = fecha_ingreso;
+    divFoto.innerHTML = `<img src="${foto}" class="h-100 w-100" style="object-fit:contain;">`;
+    document.querySelector("#lat").value = latitud;
+    document.querySelector("#lon").value = longitud;
 }
 
 function actualizarFoto(el) {
     if (el.target.files && el.target.files[0]) {
         const reader = new FileReader();
-        reader.onload=e=>{
-            divFoto.innerHTML=`<img src="${e.target.result}" class="h-100 w-100" style="object-fit:contain;">`;
+        reader.onload = e => {
+            divFoto.innerHTML = `<img src="${e.target.result}" class="h-100 w-100" style="object-fit:contain;">`;
         };
         reader.readAsDataURL(el.target.files[0]);
-        span.innerHTML=`${el.target.files[0].name}`;
-        
+        span.innerHTML = `${el.target.files[0].name}`;
+
     }
 }
 
 function limpiarForm(op) {
     form.reset();
-    document.querySelector("#idrestaurante").value="0";    
-    divFoto.innerHTML="";
-    span.innerHTML="Haz click para selccionar foto";
-    if (op){
+    document.querySelector("#idrestaurante").value = "0";
+    divFoto.innerHTML = "";
+    span.innerHTML = "Haz click para selccionar foto";
+    if (op) {
         document.querySelector("#nombre").removeAttribute("required");
-    } else{
-        document.querySelector("#nombre").setAttribute("required","true");
+    } else {
+        document.querySelector("#nombre").setAttribute("required", "true");
     }
 }
 
@@ -194,36 +215,36 @@ function crearTabla() {
 }
 
 function paginacion() {
-    while (pagination.firstElementChild){
+    while (pagination.firstElementChild) {
         pagination.removeChild(pagination.firstElementChild);
     }
-    const anterior=document.createElement("li");
+    const anterior = document.createElement("li");
     anterior.classList.add("page-item");
-    anterior.innerHTML=`<a class="page-link" href="#">&laquo;</a>`;
-    anterior.onclick=()=>{
-        objDatos.currentPage=(objDatos.currentPage==1 ? 1: --objDatos.currentPage);
+    anterior.innerHTML = `<a class="page-link" href="#">&laquo;</a>`;
+    anterior.onclick = () => {
+        objDatos.currentPage = (objDatos.currentPage == 1 ? 1 : --objDatos.currentPage);
         crearTabla();
     }
     pagination.append(anterior);
-    const totalPage=Math.ceil(objDatos.recordsFilter.length/recordShow);
+    const totalPage = Math.ceil(objDatos.recordsFilter.length / recordShow);
     for (let i = 1; i <= totalPage; i++) {
-        const el=document.createElement("li");
+        const el = document.createElement("li");
         el.classList.add("page-item");
-        if (objDatos.currentPage==i) {
+        if (objDatos.currentPage == i) {
             el.classList.add("active");
         }
-        el.innerHTML=`<a class="page-link" href="#">${i}</a>`;
-        el.onclick=()=>{
-            objDatos.currentPage=i;
+        el.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+        el.onclick = () => {
+            objDatos.currentPage = i;
             crearTabla();
         }
         pagination.append(el);
     }
-    const siguiente=document.createElement("li");
+    const siguiente = document.createElement("li");
     siguiente.classList.add("page-item");
-    siguiente.innerHTML=`<a class="page-link" href="#">&raquo;</a>`;
-    siguiente.onclick=()=>{
-        objDatos.currentPage=(objDatos.currentPage==totalPage ? totalPage: ++objDatos.currentPage);
+    siguiente.innerHTML = `<a class="page-link" href="#">&raquo;</a>`;
+    siguiente.onclick = () => {
+        objDatos.currentPage = (objDatos.currentPage == totalPage ? totalPage : ++objDatos.currentPage);
         crearTabla();
     }
     pagination.append(siguiente);

@@ -27,7 +27,8 @@ class Api {
 
     /**
     * Guarda los datos de un form de Restaurante.
-    * @param form - Formulario de guardar restaurante
+    * @param form - Formulario de guardar restaurante.
+    * @returns Lista.
     */
     async saveRestaurante(form) {
         const query = await fetch(`${BASE_API}restaurantes/save`, {
@@ -38,8 +39,24 @@ class Api {
         return data;
     }
 
+    /**
+    * Obtiene los datos de un registro de Restaurante.
+    * @param id - id del restaurante que se desea buscar.
+    * @returns Lista.
+    */
     async getOneRestaurante(id){
         const query = await fetch(`${BASE_API}restaurantes/getOneRestaurante?id=${id}`);
+        const data = await query.json();
+        return data;
+    }
+
+    /**
+    * Elimina un registro de restaurante
+    * @param id - id del restaurante que se desea eliminar.
+    * @returns Lista.
+    */
+    async deleteRestaurante(id){
+        const query = await fetch(`${BASE_API}restaurantes/deleteRestaurante?id=${id}`);
         const data = await query.json();
         return data;
     }
