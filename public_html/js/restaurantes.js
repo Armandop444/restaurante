@@ -69,7 +69,7 @@ function guardarRestaurante(e) {
         if (data.success) {
             cancelarRestaurante();
             Swal.fire({
-                icon: 'infor',
+                icon: 'info',
                 text: data.msg
             });
         } else {
