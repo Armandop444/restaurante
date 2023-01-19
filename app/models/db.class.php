@@ -27,6 +27,10 @@ class DB {
         $result = $this->conexion->query($query);
         return $this->conexion->insert_id;
     }
+    public function executeUpdate($query){
+        $result = $this->conexion->query($query);
+        return true;
+    }
 }
     
 ?>

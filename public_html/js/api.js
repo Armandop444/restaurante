@@ -37,4 +37,10 @@ class Api {
         const data = await query.json();
         return data;
     }
+
+    async getOneRestaurante(id){
+        const query = await fetch(`${BASE_API}restaurantes/getOneRestaurante?id=${id}`);
+        const data = await query.json();
+        return data;
+    }
 }

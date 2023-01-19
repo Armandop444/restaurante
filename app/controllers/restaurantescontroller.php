@@ -34,6 +34,23 @@ class RestaurantesController extends Controller {
                 $records = $this->restaurante->save($_POST, $img);
                 $info = array('success' => true, 'msg' => "Registro Guardado Con Exito");
             }
+        } else {
+            if(count($this->restaurante->getRestauranteByNameAndId($_POST["nombre"],$_POST["idrestaurante"]))>0){
+                $info = array('success' => false, 'msg' => "El Restaurante ya existe");
+            } else {
+                $records = $this->restaurante->update($_POST, $img);
+                $info = array('success' => true, 'msg' => "Registro Actualizado Con Exito");
+            }
+        }
+        echo json_encode($info);
+    }
+
+    public function getOneRestaurante(){
+        $records = $this->restaurante->getOneRestaurante($_GET["id"]);
+        if (count($records)>0){
+            $info = array('success' => true, 'records' => $records);
+        }else{
+            $info = array('success' => false, 'msg' => "El Restaurante no existe");
         }
         echo json_encode($info);
     }

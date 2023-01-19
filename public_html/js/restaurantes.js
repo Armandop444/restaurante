@@ -84,7 +84,22 @@ function guardarRestaurante(e) {
     });
 }
 function editarRestaurante(id) {
-    alert(id);
+    limpiarForm(1);
+    panelDatosRestaurante.classList.add("d-none");
+    panelFormularioRestaurante.classList.remove("d-none");
+    API.getOneRestaurante(id).then(data=>{
+        if (data.success) {
+            mostrarDatosForm(data.records[0]);
+        }else{
+            Swal.fire({
+                icon:"error",
+                title: "Error",
+                text: data.msg
+            });
+        }
+    }).catch(error=>{
+        console.error("Error",error);
+    });
 }
 
 function eliminarRestaurante(id) {
@@ -94,6 +109,19 @@ function eliminarRestaurante(id) {
 //funcion para añadir una foto con preview
 function agregarFoto() {
     inputFoto.click();   
+}
+
+function mostrarDatosForm(record){
+    const {idrestaurante, nombre_restaurante, direccion, telefono, contacto, fecha_ingreso,foto,latitud,longitud } = record;
+    document.querySelector("#idrestaurante").value=idrestaurante;
+    document.querySelector("#nombre").value=nombre_restaurante;
+    document.querySelector("#direccion").value=direccion;
+    document.querySelector("#telefono").value=telefono;
+    document.querySelector("#contacto").value=contacto;
+    document.querySelector("#fechaI").value=fecha_ingreso;
+    divFoto.innerHTML=`<img src="${foto}" class="h-100 w-100" style="object-fit:contain;">`;
+    document.querySelector("#lat").value=latitud;
+    document.querySelector("#lon").value=longitud;
 }
 
 function actualizarFoto(el) {
