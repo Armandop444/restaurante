@@ -33,14 +33,13 @@
                         <div class="alert alert-danger d-none" id="mensajeDatos"></div>
                         <!-- Tabla -->
                         <div id="contentTable" class="col-12">
-                            <div class="col-4 mb-1">
-                                <span class="input-group-append">
-                                    <input id="txtSearch" type="search" class="form-control" placeholder="Buscar">
-                                    <button class="btn btn-outline-dark mx-1" type="button">
+                            <div class="input-group col-4 mb-1">
+                                
+                                <span class="input-group-prepend">
+                                    <button class="btn" type="button">
                                         <i class="fa-solid fa-magnifying-glass"></i>
                                     </button>
-
-                                </span>
+                                </span><input id="txtSearch" type="search" class="form-control" placeholder="Buscar">
                             </div>
                             <table class="table table-striped table-dark table-bordered text-center">
                                 <thead>
@@ -54,13 +53,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+
                                 </tbody>
                             </table>
                             <!-- Paginacion -->
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination justify-content-center">
-                                    
+
                                 </ul>
                             </nav>
                         </div>
@@ -139,6 +138,6 @@
     </div>
 </body>
 <?php include_once "app/views/components/scripts.php" ?>
-<script type="text/javascript" src="<?php echo URL;?>public_html/js/restaurantes.js"></script>
+<script type="text/javascript" src="<?php echo URL; ?>public_html/js/restaurantes.js"></script>
 
 </html>
