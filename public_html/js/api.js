@@ -14,7 +14,54 @@ class Api {
         const data = await query.json();
         return data;
     }
+       //USUARIOS
+    /**
+    * Carga los datos de Usuarios.
+    * @returns Lista.
+    */
+    async loadUsers() {
+        const query = await fetch(`${BASE_API}usuarios/getAll`);
+        const data = await query.json();
+        return data;
+    }
 
+    /**
+    * Guarda los datos de un form de Usuario.
+    * @param form - Formulario de guardar Usuario.
+    * @returns Lista.
+    */
+    async saveUser(form) {
+        const query = await fetch(`${BASE_API}usuarios/save`, {
+            method: "POST",
+            body: form,
+        });
+        const data = await query.json();
+        return data;
+    }
+
+    /**
+    * Obtiene los datos de un registro de Usuario.
+    * @param id - id del usuario que se desea buscar.
+    * @returns Lista.
+    */
+    async getOneUser(id){
+        const query = await fetch(`${BASE_API}usuarios/getOneUser?id=${id}`);
+        const data = await query.json();
+        return data;
+    }
+
+    /**
+    * Elimina un registro de usuario
+    * @param id - id del usuario que se desea eliminar.
+    * @returns Lista.
+    */
+    async deleteUser(id){
+        const query = await fetch(`${BASE_API}usuarios/deleteUser?id=${id}`);
+        const data = await query.json();
+        return data;
+    }
+
+    //RESTAURANTES
     /**
     * Carga los datos de Restaurante.
     * @returns Lista.
