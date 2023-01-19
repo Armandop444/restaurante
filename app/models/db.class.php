@@ -13,6 +13,15 @@ class DB {
         }
         return $this->isConnected;
     }
+
+    public function executeQuery($query){
+        $result = $this->conexion->query($query);
+        $records = array();
+        while ($record=$result->fetch_assoc()){
+            $records[] = $record;
+        }
+        return $records;
+    }
 }
     
 ?>
