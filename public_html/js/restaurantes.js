@@ -6,7 +6,12 @@ const panelFormularioRestaurante = document.querySelector("#panelFormularioResta
 const mensaje = document.querySelector("#mensajeDatos");
 const searchText = document.querySelector("#txtSearch");
 const pagination = document.querySelector(".pagination");
-const recordShow = 1;
+const btnCancelar = document.querySelector("#btnCancelar");
+const divFoto = document.querySelector("#divFoto");
+const inputFoto = document.querySelector("#foto");
+const span = document.querySelector("#spanClick");
+const form = document.querySelector("#form");
+const recordShow = 5;
 const API = new Api();
 const objDatos = {
     records: [],
@@ -21,6 +26,10 @@ function eventListeners() {
     btnNuevo.addEventListener("click", agregarRestaurante);
     document.addEventListener("DOMContentLoaded", cargarDatos);
     searchText.addEventListener("input", filtro);
+    btnCancelar.addEventListener("click",cancelarRestaurante);
+    divFoto.addEventListener("click",agregarFoto);
+    inputFoto.addEventListener("change",actualizarFoto);
+    form.addEventListener("submit",guardarRestaurante);
 }
 
 function cargarDatos() {
@@ -39,17 +48,76 @@ function cargarDatos() {
 
 }
 
+//agregar y cancelar muestran y ocultan los paneles de la tabla y formulario de crear
 function agregarRestaurante() {
     panelDatosRestaurante.classList.add("d-none");
     panelFormularioRestaurante.classList.remove("d-none");
 }
 
+function cancelarRestaurante() {
+    panelDatosRestaurante.classList.remove("d-none");
+    panelFormularioRestaurante.classList.add("d-none");
+    cargarDatos();
+    limpiarForm();
+}
+
+// Guardar Restaurante
+function guardarRestaurante(e) {
+    e.preventDefault();
+    const formData= new FormData(form);
+    API.saveRestaurante(formData).then(data=>{
+        if (data.success) {
+            cancelarRestaurante();
+            Swal.fire({
+                icon: 'infor',
+                text: data.msg
+            });
+        }else{
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: data.msg
+            });
+        }
+    }).catch(error=>{
+        console.error("Error",error);
+    });
+}
 function editarRestaurante(id) {
     alert(id);
 }
 
 function eliminarRestaurante(id) {
     alert(id);
+}
+
+//funcion para añadir una foto con preview
+function agregarFoto() {
+    inputFoto.click();   
+}
+
+function actualizarFoto(el) {
+    if (el.target.files && el.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload=e=>{
+            divFoto.innerHTML=`<img src="${e.target.result}" class="h-100 w-100" style="object-fit:contain;">`;
+        };
+        reader.readAsDataURL(el.target.files[0]);
+        span.innerHTML=`${el.target.files[0].name}`;
+        
+    }
+}
+
+function limpiarForm(op) {
+    form.reset();
+    document.querySelector("#idrestaurante").value="0";    
+    divFoto.innerHTML="";
+    span.innerHTML="Haz click para selccionar foto";
+    if (op){
+        document.querySelector("#nombre").removeAttribute("required");
+    } else{
+        document.querySelector("#nombre").setAttribute("required","true");
+    }
 }
 
 function crearTabla() {

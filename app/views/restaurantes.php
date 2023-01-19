@@ -74,35 +74,47 @@
                         <hr class="w-100" style="height: 2px; background: darkgrey">
                         <div class="col-8 mx-auto" style="width: 100%;">
                             <form id="form" class="form-horizontal" role="form" enctype="multipart/form-data">
-                                <input type="hidden" name="id_usr" id="id_usr">
+                                <input type="hidden" name="idrestaurante" id="idrestaurante" value="0">
                                 <div class="form-group row">
-                                    <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+                                    <label for="nombre" class="col-sm-2 col-form-label">Nombre Restaurante</label>
                                     <div class="col-sm-6 ">
-                                        <input type="text" class="form-control" id="nombre" required>
+                                        <input type="text" class="form-control" id="nombre" name="nombre" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="direccion" class="col-sm-2 col-form-label">Direccion</label>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control" id="direccion" required>
+                                        <input type="text" class="form-control" id="direccion" name="direccion" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control" id="telefono" required>
+                                        <input type="text" class="form-control" id="telefono" name="telefono" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="contacto" class="col-sm-2 col-form-label">Contacto</label>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control" id="contacto" required>
+                                        <input type="text" class="form-control" id="contacto" name="contacto" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="fechaI" class="col-sm-2 col-form-label">Fecha Ingreso</label>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control" id="fechaI" required>
+                                        <input type="text" class="form-control" id="fechaI" name="fechaI" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="lat" class="col-sm-2 col-form-label">Latitud</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="lat" name="lat" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="lon" class="col-sm-2 col-form-label">Longitud</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" id="lon" name="lon" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -111,8 +123,8 @@
                                     <div class="col-sm-6">
                                         <div id="divFoto" class="img-thumbnail" style="width: 200px;height: 200px;">
                                         </div>
-                                        <span>Haz click para selccionar foto</span>
-                                        <input type="file" class="form-control d-none" id="foto">
+                                        <span id="spanClick">Haz click para selccionar foto</span>
+                                        <input type="file" class="form-control d-none" id="foto" name="foto">
                                     </div>
                                 </div>
 
@@ -124,7 +136,9 @@
                                         <button type="submit" class="btn btn-success mx-3"
                                             id="btnGuardar">Guardar</button>
                                     </div>
-
+                                </div>
+                                <div class="form-group row">
+                                    mapa
                                 </div>
                             </form>
                         </div>

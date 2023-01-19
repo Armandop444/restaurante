@@ -22,6 +22,11 @@ class DB {
         }
         return $records;
     }
+
+    public function executeInsert($query){
+        $result = $this->conexion->query($query);
+        return $this->conexion->insert_id;
+    }
 }
     
 ?>
