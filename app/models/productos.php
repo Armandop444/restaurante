@@ -20,7 +20,7 @@ class Productos extends DB{
         return $this->executeQuery("Select * from productos where nombre='$name' and idproducto<>'$id'");
     }
 
-    //guardar registro de usuario
+    //guardar registro de producto
     public function save($data,$img, $img2, $img3){
         return $this->executeInsert("Insert into productos set idrestaurante='{$data["nombreR"]}', nombre='{$data["nombre"]}',
         descripcion='{$data["descripcion"]}', foto1='{$img}', foto2='{$img2}', foto3='{$img3}', precio='{$data["precio"]}' ");
@@ -32,7 +32,7 @@ class Productos extends DB{
         
     }
 
-    //buscar un registro de usuario
+    //buscar un registro de producto
     public function getOneProducto($id){
         return $this->executeQuery("select productos.*, restaurantes.nombre_restaurante as nombre_restaurante 
         from productos inner join restaurantes on restaurantes.idrestaurante = productos.idrestaurante where idproducto= '$id'");
@@ -57,7 +57,7 @@ class Productos extends DB{
         '{$data["descripcionI"]}', '{$data["costoI"]}')");
     }
 
-    //buscar un registro de usuario
+    //buscar un registro de Ingrediente
     public function getOneIngrediente($id){
         return $this->executeQuery("Select * from ingredientes where idingrediente= '$id'");
     }
@@ -74,5 +74,20 @@ class Productos extends DB{
     public function deleteIngrediente($id){
         return $this->executeUpdate("delete from ingredientes where idingrediente='$id'");
     }
+
+    //Obtiene los productos filtrados
+    public function getProductosReportes($data){
+        $condicion="";
+        if ($data['id']!=0) {
+            $condicion=" and productos.idrestaurante='{$data['id']}'";   
+        }
+        if($data['fechaI']!='' && $data['fechaF']!=''){
+            $condicion.=" and restaurantes.fecha_ingreso between '{$data['fechaI']}' AND '{$data['fechaF']}'";
+        }else if($data['fechaI']!=''){
+            $condicion.="and restaurantes.fecha_ingreso = '{$data['fechaI']}'";           
+        }
+        
+       return $this->executeQuery("select productos.*, restaurantes.nombre_restaurante,restaurantes.fecha_ingreso FROM productos inner join restaurantes on restaurantes.idrestaurante = productos.idrestaurante where 1 {$condicion}");        
+    }   
 }
 ?>
