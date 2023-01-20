@@ -159,7 +159,7 @@ function limpiarForm(op) {
     form.reset();
     document.querySelector("#id_usr").value = "0";
     divFoto.innerHTML = "";
-    span.innerHTML = "Haz click para selccionar foto";
+    span.innerHTML = "Haz click para seleccionar foto";
     if (op) {
         document.querySelector("#pass").removeAttribute("required");
     } else {

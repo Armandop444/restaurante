@@ -27,7 +27,7 @@ class Usuarios extends DB{
     public function update($data,$img){
         return $this->executeUpdate("Update usuarios SET usuario='{$data["user"]}', password=if('{$data["pass"]}'='', password,md5('{$data["pass"]}')),
         nombres='{$data["nombres"]}', apellidos='{$data["apellidos"]}', tipo='{$data["tipo"]}', foto=if('{$img}'='',foto,'{$img}')
-        WHERE `id_usr`='{$data['id_usr']}'");
+        where id_usr='{$data['id_usr']}'");
     }
 
     //buscar un registro de usuario

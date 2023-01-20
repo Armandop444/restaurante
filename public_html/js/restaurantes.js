@@ -161,7 +161,7 @@ function limpiarForm(op) {
     form.reset();
     document.querySelector("#idrestaurante").value = "0";
     divFoto.innerHTML = "";
-    span.innerHTML = "Haz click para selccionar foto";
+    span.innerHTML = "Haz click para seleccionar foto";
     if (op) {
         document.querySelector("#nombre").removeAttribute("required");
     } else {

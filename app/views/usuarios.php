@@ -112,7 +112,7 @@
                                     <div class="col-sm-6">
                                         <div id="divFoto" class="img-thumbnail" style="width: 200px;height: 200px;">
                                         </div>
-                                        <span id="spanClick">Haz click para selccionar foto</span>
+                                        <span id="spanClick">Haz click para seleccionar foto</span>
                                         <input type="file" class="form-control d-none" id="foto" name="foto">
                                     </div>
                                 </div>
