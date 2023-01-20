@@ -14,7 +14,8 @@ class Api {
         const data = await query.json();
         return data;
     }
-       //USUARIOS
+    
+    //USUARIOS
     /**
     * Carga los datos de Usuarios.
     * @returns Lista.
@@ -107,4 +108,51 @@ class Api {
         const data = await query.json();
         return data;
     }
+
+    //Productos
+    /**
+    * Carga los datos de Productos.
+    * @returns Lista.
+    */
+    async loadProductos() {
+        const query = await fetch(`${BASE_API}productos/getAll`);
+        const data = await query.json();
+        return data;
+    }
+
+    /**
+    * Guarda los datos de un form de Productos.
+    * @param form - Formulario de guardar Producto.
+    * @returns Lista.
+    */
+    async saveProducto(form) {
+        const query = await fetch(`${BASE_API}productos/save`, {
+            method: "POST",
+            body: form,
+        });
+        const data = await query.json();
+        return data;
+    }
+    /**
+    * Obtiene los datos de un registro de producto.
+    * @param id - id del producto que se desea buscar.
+    * @returns Lista.
+    */
+    async getOneProducto(id){
+        const query = await fetch(`${BASE_API}productos/getOneProducto?id=${id}`);
+        const data = await query.json();
+        return data;
+    }
+
+    /**
+    * Elimina un registro de producto
+    * @param id - id del producto que se desea eliminar.
+    * @returns Lista.
+    */
+    async deleteProducto(id){
+        const query = await fetch(`${BASE_API}productos/deleteProducto?id=${id}`);
+        const data = await query.json();
+        return data;
+    }    
+
 }
