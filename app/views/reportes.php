@@ -13,7 +13,12 @@
         <div class="row mx-2">
             <div class="col-2 list-group-item-dark">
                 <section id="menu">
-                    <?php include_once "app/views/components/menu.php" ?>
+                    <?php if ($_SESSION["id_usr"]=="1") {
+                        include_once "app/views/components/menu.php";
+                    } else {
+                        include_once "app/views/components/menuuser.php";
+                    }?>
+                    
                 </section>
             </div>
             <div class="col-10 overflow-auto" style="max-height: 780px;">

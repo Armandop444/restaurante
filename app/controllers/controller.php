@@ -14,12 +14,14 @@ class Controller {
             if(!isset($_SESSION["id_usr"])){
                 $this->view->render("login");
                 exit(0);
+            }else{
+                //Se verifica si el el tipo de usuario o admin, en caso sea usuario lo envia a dashboarduser
+                if ($_SESSION["tipo"]==="2" && ($view=="productos" || $view=="restaurantes" || $view=="usuarios")) {
+                    $this->view->render("dashboarduser");
+                    return;
+                }
             }
-            //Se verifica si el el tipo de usuario o admin, en caso sea usuario lo envia a dashboarduser
-            if ($_SESSION["tipo"]==="2") {
-                $this->view->Render("dashboarduser");
-                return;
-            }
+            
             
         }
         if (empty($param)){
