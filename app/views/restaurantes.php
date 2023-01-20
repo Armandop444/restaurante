@@ -102,7 +102,7 @@
                                 <div class="form-group row">
                                     <label for="fechaI" class="col-sm-2 col-form-label">Fecha Ingreso</label>
                                     <div class="col-sm-6">
-                                        <input type="text" class="form-control" id="fechaI" name="fechaI" required>
+                                        <input type="date" class="form-control" id="fechaI" name="fechaI" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
