@@ -92,6 +92,54 @@ class ProductosController extends Controller {
         $info = array('success' => true, 'msg' => "Registro eliminado con exito");
         echo json_encode($info);
     }
+
+    public function getIngredientesByProducto(){
+        $records = $this->producto->getIngredientesByProducto($_GET["id"]);
+        if (count($records)>0){
+            $info = array('success' => true, 'records' => $records);
+        }else{
+            $records = $this->producto->getOneProducto($_GET["id"]);
+            $info = array('success' => true, 'records' => $records);
+        }
+        echo json_encode($info);
+    }
+
+    public function saveIngrediente(){
+        if ($_POST["idingrediente"]=="0") {
+            if(count($this->producto->getIngredienteByNameAndIdP($_POST["descripcionI"],$_POST["idproductoI"]))>0){
+                $info = array('success' => false, 'msg' => "El Ingrediente ya existe");
+            } else {
+                    $records = $this->producto->saveIngrediente($_POST);
+                    $info = array('success' => true, 'msg' => "Registro Guardado Con Exito");
+            }
+        } else {
+            if(count($this->producto->getIngredienteByNameAndId($_POST["descripcionI"],$_POST["idingrediente"]))>0){
+                $info = array('success' => false, 'msg' => "El Ingrediente ya existe");
+            } else {
+                    $records = $this->producto->updateIngrediente($_POST);
+                    $info = array('success' => true, 'msg' => "Registro Actualizado Con Exito");
+                
+            }
+        }
+        echo json_encode($info);
+
+    }
+
+    public function getOneIngrediente(){
+        $records = $this->producto->getOneIngrediente($_GET["id"]);
+        if (count($records)>0){
+            $info = array('success' => true, 'records' => $records);
+        }else{
+            $info = array('success' => false, 'msg' => "El Ingrediente no existe");
+        }
+        echo json_encode($info);
+    }
+
+    public function deleteIngrediente(){
+        $records = $this->producto->deleteIngrediente($_GET["id"]);
+        $info = array('success' => true, 'msg' => "Registro eliminado con exito");
+        echo json_encode($info);
+    }
 }
 
 ?>

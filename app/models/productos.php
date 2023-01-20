@@ -41,5 +41,38 @@ class Productos extends DB{
     public function deleteProducto($id){
         return $this->executeUpdate("delete from productos where idproducto='$id'");
     }
+
+    public function getIngredientesByProducto($id){
+        return $this->executeQuery("Select ingredientes.*, productos.nombre as nombre_producto from ingredientes inner join productos on
+        productos.idproducto = ingredientes.idproducto where productos.idproducto='$id'");
+    }
+
+    //Buscar por nombre
+    public function getIngredienteByNameAndIdP($name,$id){
+        return $this->executeQuery("Select * from ingredientes where descripcion ='$name' and idproducto='$id'");
+    }
+
+    public function saveIngrediente($data){
+        return $this->executeInsert("insert into ingredientes (idproducto , descripcion, costo_adicional) VALUES ('{$data["idproductoI"]}',
+        '{$data["descripcionI"]}', '{$data["costoI"]}')");
+    }
+
+    //buscar un registro de usuario
+    public function getOneIngrediente($id){
+        return $this->executeQuery("Select * from ingredientes where idingrediente= '$id'");
+    }
+
+    //Buscar por nombre y id
+    public function getIngredienteByNameAndId($name,$id){
+        return $this->executeQuery("Select * from ingredientes where descripcion='$name' and idingrediente<>'$id'");
+    }
+    public function updateIngrediente($data){
+        return $this->executeUpdate("Update ingredientes set idproducto = '{$data["idproductoI"]}', descripcion = '{$data["descripcionI"]}',
+        costo_adicional = '{$data["costoI"]}' WHERE ingredientes.idingrediente = '{$data["idingrediente"]}' AND ingredientes.idproducto = '{$data["idproductoI"]}'");   
+    }
+
+    public function deleteIngrediente($id){
+        return $this->executeUpdate("delete from ingredientes where idingrediente='$id'");
+    }
 }
 ?>

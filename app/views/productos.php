@@ -98,7 +98,8 @@
                                 <div class="form-group row">
                                     <label for="precio" class="col-sm-2 col-form-label">Precio</label>
                                     <div class="col-sm-6 ">
-                                        <input type="number" class="form-control" id="precio" name="precio" step="0.01" required>
+                                        <input type="number" class="form-control" id="precio" name="precio" step="0.01"
+                                            required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -143,6 +144,83 @@
                             </form>
                         </div>
                     </div>
+                    <!-- Panel Ingredientes -->
+                    <div id="panelIngredientes" class="row bg-gray mx-auto content-panel d-none">
+                        <!-- Titulo -->
+                        <div class="col-12">
+                            <h1 class="font-weight-bold"><i class="mr-3 fa-solid fa-spoon"></i>Ingredientes</h1>
+                        </div>
+                        <hr class="w-100" style="height: 2px; background: darkgrey">
+                        <div class="col-8 mx-auto" style="width: 100%;">
+                            <form id="formIngredientes" class="form-horizontal" role="form"
+                                enctype="multipart/form-data">
+                                <input type="hidden" name="idingrediente" id="idingrediente" value="0">
+                                <input type="hidden" name="idproductoI" id="idproductoI">
+                                <div class="form-group row d-flex d-flex flex-column align-items-end">
+                                    <button type="button" class="btn btn-danger" id="btnCancelarI"><i
+                                            class="fa-solid fa-xmark mr-2"></i>Cerrar</button>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="nombreP" class="col-sm-3 col-form-label">Producto</label>
+                                    <div class="col-sm-6 ">
+                                        <input type="text" class="form-control" id="nombreP" name="nombreP" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="descripcion" class="col-sm-3 col-form-label">Descripcion</label>
+                                    <div class="col-sm-6 ">
+                                        <input type="text" class="form-control" id="descripcionI" name="descripcionI"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="precio" class="col-sm-3 col-form-label">Costo Adicional</label>
+                                    <div class="col-sm-6 ">
+                                        <input type="number" class="form-control" id="costoI" name="costoI" step="0.01"
+                                            required>
+                                    </div>
+                                </div>
+
+                                <div class="alert alert-danger d-none" id="mensaje"></div>
+
+                                <div class="form-group row">
+                                    <div class="col-2 mx-auto" style="width: 100%;">
+                                        <button type="submit" class="btn btn-success mx-3"
+                                            id="btnGuardarI">Guardar</button>
+                                    </div>
+                                </div>
+                                <br>
+
+
+                            </form>
+                            <!-- Tabla Ingredientes -->
+                            <div id="contentTableI" class="col-12">
+                                <div class="input-group col-8 mb-1">
+
+                                </div>
+                                <table class="table table-striped table-dark table-bordered text-center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Descripcion</th>
+                                            <th scope="col">Precio</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                                <!-- Paginacion -->
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center">
+
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+
                 </section>
             </div>
         </div>

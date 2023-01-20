@@ -109,7 +109,7 @@ class Api {
         return data;
     }
 
-    //Productos
+    //PRODUCTOS
     /**
     * Carga los datos de Productos.
     * @returns Lista.
@@ -153,6 +153,52 @@ class Api {
         const query = await fetch(`${BASE_API}productos/deleteProducto?id=${id}`);
         const data = await query.json();
         return data;
-    }    
+    }
+    
+    //INGREDIENTES
+    /**
+    * Carga los datos de Ingredientes.
+    * @returns Lista.
+    */
+    async getIngredientesByProducto(id) {
+        const query = await fetch(`${BASE_API}productos/getIngredientesByProducto?id=${id}`);
+        const data = await query.json();
+        return data;
+    }
+    /**
+    * Guarda los datos de ingredientes
+    * @param form Datos para de guardar ingrediente.
+    * @returns Lista.
+    */
+    async saveIngrediente(form) {
+        const query = await fetch(`${BASE_API}productos/saveIngrediente`, {
+            method: "POST",
+            body: form,
+        });
+        const data = await query.json();
+        return data;
+    }
+
+    /**
+    * Obtiene los datos de un registro de ingrediente.
+    * @param id - id del ingrediente que se desea buscar.
+    * @returns Lista.
+    */
+    async getOneIngrediente(id){
+        const query = await fetch(`${BASE_API}productos/getOneIngrediente?id=${id}`);
+        const data = await query.json();
+        return data;
+    }
+
+    /**
+    * Elimina un registro de ingrediente
+    * @param id - id del ingrediente que se desea eliminar.
+    * @returns Lista.
+    */
+    async deleteIngrediente(id){
+        const query = await fetch(`${BASE_API}productos/deleteIngrediente?id=${id}`);
+        const data = await query.json();
+        return data;
+    }
 
 }
