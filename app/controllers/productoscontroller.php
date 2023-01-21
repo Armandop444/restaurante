@@ -14,6 +14,12 @@ class ProductosController extends Controller {
         echo json_encode($info);
     }
 
+    public function getAllIngredientes(){
+        $records = $this->producto->getAllIngredientes();
+        $info = array('success' => true, 'records' => $records);
+        echo json_encode($info);
+    }
+
     public function save(){
         $img = "";
         $img2 = "";

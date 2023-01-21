@@ -75,6 +75,10 @@ class Productos extends DB{
         return $this->executeUpdate("delete from ingredientes where idingrediente='$id'");
     }
 
+    public function getAllIngredientes(){
+        return $this->executeQuery("select * from ingredientes");
+    }
+
     //Obtiene los productos filtrados
     public function getProductosReportes($data){
         $condicion="";

@@ -165,6 +165,16 @@ class Api {
         const data = await query.json();
         return data;
     }
+    
+    /**
+    * Carga los datos de ingrediente.
+    * @returns Lista.
+    */
+    async loadIngredientes() {
+        const query = await fetch(`${BASE_API}productos/getAllIngredientes`);
+        const data = await query.json();
+        return data;
+    }
     /**
     * Guarda los datos de ingredientes
     * @param form Datos para de guardar ingrediente.
