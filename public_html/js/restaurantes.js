@@ -17,8 +17,11 @@ const objDatos = {
     records: [],
     recordsFilter: [],
     currentPage: 1,
-    filter: ""
+    filter: "",
+    markers: []
 };
+let marker;
+let map;
 
 eventListeners();
 
@@ -52,6 +55,7 @@ function cargarDatos() {
 function agregarRestaurante() {
     panelDatosRestaurante.classList.add("d-none");
     panelFormularioRestaurante.classList.remove("d-none");
+    initMapForm();
 }
 
 function cancelarRestaurante() {
@@ -85,6 +89,7 @@ function guardarRestaurante(e) {
 }
 function editarRestaurante(id) {
     limpiarForm(1);
+
     panelDatosRestaurante.classList.add("d-none");
     panelFormularioRestaurante.classList.remove("d-none");
     API.getOneRestaurante(id).then(data => {
@@ -143,6 +148,8 @@ function mostrarDatosForm(record) {
     divFoto.innerHTML = `<img src="${foto}" class="h-100 w-100" style="object-fit:contain;">`;
     document.querySelector("#lat").value = latitud;
     document.querySelector("#lon").value = longitud;
+    initMapForm({ lat: Number(latitud), lng: Number(longitud) });
+    addMarker({ lat: Number(latitud), lng: Number(longitud) },nombre_restaurante);
 }
 
 function actualizarFoto(el) {
@@ -170,9 +177,12 @@ function limpiarForm(op) {
 }
 
 function crearTabla() {
+    initMapTabla();
     //Filtro para buscar
     if (objDatos.filter === "") {
         objDatos.recordsFilter = objDatos.records.map(item => item);
+
+
     } else {
         objDatos.recordsFilter = objDatos.records.filter(item => {
             const { nombre_restaurante, direccion, contacto } = item;
@@ -188,6 +198,12 @@ function crearTabla() {
 
     let html = "";
     objDatos.recordsFilter.forEach((item, index) => {
+        //Se borran los marcadores que existen para poner los filtrados
+        objDatos.markers.splice(0, objDatos.markers.length);
+        objDatos.markers.push({ lat: item["latitud"], lng: item["longitud"] });
+        //Se envian los datos para que aparezcan en el mapa
+        addMarker({ lat: Number(item["latitud"]), lng: Number(item["longitud"])},item["nombre_restaurante"] );
+
         //Se crea la tabla con los datos paginados
         if ((index >= recordIni) && (index <= recordFin)) {
             const { nombre_restaurante, direccion, telefono, contacto, fecha_ingreso } = item;
@@ -212,6 +228,7 @@ function crearTabla() {
 
     tableContent.innerHTML = html;
     paginacion();
+
 }
 
 function paginacion() {
@@ -254,4 +271,60 @@ function filtro(e) {
     e.preventDefault();
     objDatos.filter = this.value;
     crearTabla();
+}
+
+//Iniciar el mapa de la tabla de restaurantes
+function initMapTabla() {
+    const center = { lat: 13.977401002393075, lng: -89.56200214651783 };
+    map = new google.maps.Map(document.getElementById("mapTabla"), {
+        center: center,
+        zoom: 10,
+        streetViewControl: false,
+    });
+}
+
+//Iniciar el mapa del formulario de restaurantes
+function initMapForm(center = { lat: 13.977401002393075, lng: -89.56200214651783 }) {
+
+    map = new google.maps.Map(document.getElementById("mapForm"), {
+        center: center,
+        zoom: 10,
+        streetViewControl: false,
+    });
+
+    // Agrega un evento click al mapa
+    map.addListener("click", function (e) {
+        //Obtiene las coordenadas del click
+        var lat = e.latLng.lat();
+        var lng = e.latLng.lng();
+        //Se setean a los inputs
+        document.querySelector("#lat").value = lat;
+        document.querySelector("#lon").value = lng;
+        //Borramos el marker si es que existe
+        if (marker) {
+            marker.setMap(null);
+        }
+        //Añadimos el marker
+        marker = new google.maps.Marker({
+            position: { lat: lat, lng: lng },
+            map: map,
+        });
+    });
+}
+
+//Agregar un marker
+function addMarker(LatLng, title = "") {
+    if (title == "") {
+        marker = new google.maps.Marker({
+            position: { lat: LatLng["lat"], lng: LatLng["lng"] },
+            map: map,
+        });
+    }else{
+        marker = new google.maps.Marker({
+            position: { lat: LatLng["lat"], lng: LatLng["lng"] },
+            map: map,
+            title: title
+        });
+    }
+
 }

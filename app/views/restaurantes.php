@@ -34,7 +34,7 @@
                         <!-- Tabla -->
                         <div id="contentTable" class="col-12">
                             <div class="input-group col-4 mb-1">
-                                
+
                                 <span class="input-group-prepend">
                                     <button class="btn" type="button">
                                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -63,6 +63,7 @@
                                 </ul>
                             </nav>
                         </div>
+                        <div class="col-10 w-100 mx-auto mb-5" id="mapTabla" style="height: 500px; "></div>
                     </div>
                     <!-- Panel Formulario -->
                     <div id="panelFormularioRestaurante" class="row bg-gray mx-auto content-panel d-none">
@@ -72,56 +73,70 @@
                             </h1>
                         </div>
                         <hr class="w-100" style="height: 2px; background: darkgrey">
-                        <div class="col-8 mx-auto" style="width: 100%;">
-                            <form id="form" class="form-horizontal" role="form" enctype="multipart/form-data">
+                        <div class="col-6 col-md-5 d-flex flex-column ">
+                            <form id="form" class="form-horizontal align-self-end" role="form"
+                                enctype="multipart/form-data">
                                 <input type="hidden" name="idrestaurante" id="idrestaurante" value="0">
+                                <div class="form-group row row-cols-2">
+                                    <div class="col-1 mx-auto" style="width: 100%;">
+                                        <button type="button" class="btn btn-primary"
+                                            id="btnCancelar">Cancelar</button>
+                                    </div>
+                                    <div class="col-1 mx-auto" style="width: 100%;">
+                                        <button type="submit" class="btn btn-success "
+                                            id="btnGuardar">Guardar</button>
+                                    </div>
+                                </div>
                                 <div class="form-group row">
                                     <label for="nombre" class="col-sm-2 col-form-label">Nombre Restaurante</label>
-                                    <div class="col-sm-6 ">
+                                    <div class="col-sm-10 ">
                                         <input type="text" class="form-control" id="nombre" name="nombre" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="direccion" class="col-sm-2 col-form-label">Direccion</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control" id="direccion" name="direccion" required>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="direccion" name="direccion"
+                                            required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="telefono" class="col-sm-2 col-form-label">Telefono</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-10">
                                         <input type="text" class="form-control" id="telefono" name="telefono" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="contacto" class="col-sm-2 col-form-label">Contacto</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-10">
                                         <input type="text" class="form-control" id="contacto" name="contacto" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="fechaI" class="col-sm-2 col-form-label">Fecha Ingreso</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-10">
                                         <input type="date" class="form-control" id="fechaI" name="fechaI" required>
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
                                     <label for="lat" class="col-sm-2 col-form-label">Latitud</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-10">
                                         <input type="text" class="form-control" id="lat" name="lat" required>
                                     </div>
+
                                 </div>
                                 <div class="form-group row">
                                     <label for="lon" class="col-sm-2 col-form-label">Longitud</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-10">
                                         <input type="text" class="form-control" id="lon" name="lon" required>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="fechaI" class="col-sm-2 col-form-label">Foto</label>
 
-                                    <div class="col-sm-6">
-                                        <div id="divFoto" class="img-thumbnail" style="width: 200px;height: 200px;">
+                                    <div class="col-sm-10">
+                                        <div id="divFoto" class="img-thumbnail" style="width: 200px;height: 140px;">
                                         </div>
                                         <span id="spanClick">Haz click para seleccionar foto</span>
                                         <input type="file" class="form-control d-none" id="foto" name="foto">
@@ -129,19 +144,17 @@
                                 </div>
 
                                 <div class="alert alert-danger d-none" id="mensaje"></div>
-                                <div class="form-group row">
-                                    <div class="col-5 mx-auto" style="width: 100%;">
-                                        <button type="button" class="btn btn-primary mr-3"
-                                            id="btnCancelar">Cancelar</button>
-                                        <button type="submit" class="btn btn-success mx-3"
-                                            id="btnGuardar">Guardar</button>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    mapa
-                                </div>
+
                             </form>
+
                         </div>
+                        <div class="col-md-4 col-lg-5 mx-5">
+                            <div class="row">
+                                <div class="col-12 w-100" id="mapForm" style="height: 400px; "></div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </section>
             </div>

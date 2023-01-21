@@ -3,3 +3,4 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script type="text/javascript" src="<?php echo URL; ?>public_html/js/api.js"></script>
 <script type="text/javascript" src="<?php echo URL; ?>public_html/js/bootstrap.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArlkiycG5_JAeHE9fHoq13MKoBiiR3M9o"></script>
